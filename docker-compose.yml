@@ -1,0 +1,38 @@
+version: "3"
+services:
+
+  front:
+    build: ./front
+    ports:
+      - "8123:3000"
+
+  backend:
+    build: ./backend
+    container_name: eaw_app_backend
+    ports:
+      - "3333:3333"
+    volumes:
+      - ./backend:/app
+    links:
+      - eaw_db
+
+  eaw_db:
+    build: ./mysql
+    container_name: eaw_db
+    volumes:
+      - ./mysql/mysql_data:/var/lib/mysql
+      - ./mysql/sqls:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=eaw12345
+      - MYSQL_DATABASE=eaw_app
+    
+  # nginx:
+  #   build: ./nginx
+  #   container_name: app_nginx
+  #   ports:
+  #     - "8080:80"
+  #   links:
+  #     - "backend"
+  #   volumes:
+  #     - ./front/build:/app:ro
+
