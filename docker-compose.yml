@@ -1,10 +1,10 @@
 version: "3"
 services:
 
-  front:
-    build: ./front
-    ports:
-      - "8000:3000"
+  # front:
+  #   build: ./front
+  #   ports:
+  #     - "8000:3000"
 
   backend:
     build: ./backend
@@ -30,7 +30,7 @@ services:
     build: ./nginx
     container_name: app_nginx
     ports:
-      - "8080:80"
+      - "80:80"
     links:
       - "backend"
     volumes:
