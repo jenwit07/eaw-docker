@@ -34,5 +34,5 @@ services:
     links:
       - "backend"
     volumes:
-      - ./front/build:/app:ro
+      - ./build:/app:ro
 
